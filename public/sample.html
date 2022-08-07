@@ -49,16 +49,16 @@
         const a = document.querySelector("#num1").value;
         const b = document.querySelector("#num2").value;
 
-        fetch("/addTwoNumbers", {
+        fetch("/addTwoNumber", {
           method: "POST",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({
+          body: {
             a: parseInt(a),
             b: parseInt(b)
-          })
+          }
         })
           .then(res => res.json())
           .then(data => {

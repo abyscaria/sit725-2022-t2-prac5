@@ -1,12 +1,13 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const path = require("path");
+const app = express();
 
-app.use(express.static(__dirname+'/public'))
+app.use(express.static(__dirname+"/public"))
 
 //app.use(express.static(__dirname+"test.html"))
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({extended: false }));
 
 const addNumbers = (number1, number2) => {
     var num1 = parseInt(number1)
@@ -15,19 +16,6 @@ const addNumbers = (number1, number2) => {
     return result;
 }
 
-const dividNumbers = (number1, number2) => {
-    var num1 = parseInt(number1)
-    var num2 = parseInt(number2)
-    var result = num1 / num2;
-    return result;
-}
-
-const multNumbers = (number1, number2) => {
-    var num1 = parseInt(number1)
-    var num2 = parseInt(number2)
-    var result = num1 * num2;
-    return result;
-}
 
 /*app.get("/addTwoNumbers",(req,res) => {
     var number1 = req.query.number1;
@@ -36,16 +24,26 @@ const multNumbers = (number1, number2) => {
     res.json({statusCode: 200, data: result, message:"Success"})
 })*/
 
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "sample.html"));
+app.get("/addTwoNumber", (req, res) => {
+    res.sendFile(path.join(__dirname,"/"));
   });
 
-app.post("/addTwoNumbers",(req,res) => {
-    var number1 = req.query.number1;
-    var number2 = req.query.number2;
+  /*app.post("/addTwoNumbers",(req,res) => {
+    var number1 = req.body.number1;
+    var number2 = req.body.number2;
+    console.log("number1:", number1);
+    console.log("number2:", number2); 
     var result = addNumbers(number1,number2)
-    res.send({data:result})
-})
+    res.json({statusCode: 200, data: result, message:"Success"})
+})*/
+
+app.post("/addTwoNumber", (req, res) => {
+    const { a, b } = req.body;
+    res.send({
+      result: parseInt(a) + parseInt(b)
+    });
+  });
+
 
 var port = process.env.port || 4000;
 
