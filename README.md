@@ -1,6 +1,7 @@
-# sit725-2022-t2-prac3  - Bootstrap example 
+# sit725-2022-t2-prac3  - Getting into Graphic 
 
-This is a very basic node express application that host a web application. This aplication tries to demonstrate a creation of very simple express app and tries to create a few api's to bring some changes in data.
+This week we start making things more graphical, and understanding more about developing proper web applications. 
+Using Materialize -  A modern responsive front-end framework based on Material Design, Adding some new age web page designs 
 
 ## Pre-requisite
 Install nodejs with all package including npm 
