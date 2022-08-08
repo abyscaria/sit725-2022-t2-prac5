@@ -13,7 +13,7 @@
 }
 .materialboxed-image {
     margin: 0 auto;
-    height: 400px;
+    height: 300px;
 }
 .click-me-button {
     background-color: #582c2e;
@@ -26,7 +26,7 @@
 .h1cars {
     font-family: cursive;
     font-style: oblique;
-    background-color: rgb(241, 251, 249);
+    background-color: rgb(31, 73, 64);
     margin: auto;
     align-items: center;
     width: fit-content;
