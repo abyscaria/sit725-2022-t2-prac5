@@ -1,4 +1,4 @@
-# sit725-2022-t2-prac3  - Getting into Graphic 
+# sit725-2022-t2-prac3  - Getting into Graphic & Bootstrap 
 
 This week we start making things more graphical, and understanding more about developing proper web applications. 
 Using Materialize -  A modern responsive front-end framework based on Material Design, Adding some new age web page designs 
@@ -11,13 +11,12 @@ Install nodejs with all package including npm
 Open the project in visual studio code
 
 ```
-$ npm install
+$ npm install -s express
 $ npm run start
 ```
 ### Steps to check the website active 
-- copy paste the url from the Terminal output of "npm run start" command
-- Paste it in a browser and press enter
-- to view the addiional test page add test page at the end of the url on the browser - http://localhost:5000/test.html
+- paste the url on a browswer : http://localhost:5000 - to demonstrate some graphics using Meterialize 
+- to view the bootstrap example please try this url:  http://localhost:5000/sendmessage.html
 
 
 ## Copyrights

@@ -44,6 +44,14 @@ app.post("/addTwoNumber", (req, res) => {
     });
   });
 
+  var messages =[{name:"Aby", message:"Where are you?"},{name:"Nathan", message:"How are you?"}
+ ]
+
+  app.get("/messages", (req, res) => {
+    res.send(messages);
+  });
+
+
 
 var port = process.env.port || 5000;
 
