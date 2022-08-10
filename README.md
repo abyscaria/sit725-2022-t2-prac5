@@ -1,5 +1,4 @@
-# sit725-2022-t2-prac3  - Getting into Graphic & Bootstrap 
-
+# sit725-2022-t2-prac  - Connect to a Database
 This week we start making things more graphical, and understanding more about developing proper web applications. 
 Using Materialize -  A modern responsive front-end framework based on Material Design, Adding some new age web page designs 
 
