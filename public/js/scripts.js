@@ -1,4 +1,36 @@
 
+    const getProjects = () => {
+        $.get('/api/projects',(response) => {
+            if(response.statusCode==200){
+                addCards(response.data);
+            }
+        })
+    }
+    
+    //ajax function...
+    const addProjectToApp = (project) => {
+        $.ajax({
+            url: '/api/projects',
+            data: project,
+            type: 'POST',
+            success: (result) => {
+                alert(result.message);
+                location.reload(); // it automatically reloads the page 
+            }
+        })
+    }
+    
+    const submitForm = () => {
+        let formData = {};
+        formData.title = $('#title').val();
+        formData.image = $('#image').val();
+        formData.link = $('#link').val();
+        formData.description = $('#description').val();
+    
+        console.log("Form Data Submitted: ", formData);
+        addProjectToApp(formData);
+    }
+    
     const cardList = [
         {
             title: "Laborgini-Murci-Stick",
@@ -38,7 +70,7 @@
         alert("Thanks for clicking me. Hope you have a nice day!")
     }
     
-    const submitForm = () => {
+  /*   const submitForm = () => {
         let formData = {};
         formData.first_name = $('#first_name').val();
         formData.last_name = $('#last_name').val();
@@ -48,11 +80,21 @@
         console.log("Form Data Submitted: ", formData);
     }
     
-    $(document).ready(function(){
+   $(document).ready(function(){
         $('.materialboxed').materialbox();
         addCards(cardList);
         $('.modal').modal();
         $('#formSubmit').click(()=>{
             submitForm();
         })
-    })
+    })*/
+
+    $(document).ready(function(){
+        $('.materialboxed').materialbox();
+        $('#formSubmit').click(()=>{
+            submitForm();
+        })
+        getProjects();
+        $('.modal').modal();
+      });
+    

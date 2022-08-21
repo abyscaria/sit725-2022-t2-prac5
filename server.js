@@ -1,60 +1,94 @@
-const express = require('express');
-const path = require("path");
-const app = express();
-
-app.use(express.static(__dirname+"/public"))
-
-//app.use(express.static(__dirname+"test.html"))
-
+var express = require("express")
+var app = express()
+app.use(express.static(__dirname+'/public'))
 app.use(express.json());
-app.use(express.urlencoded({extended: false }));
+app.use(express.urlencoded({ extended: false }));
+let projectCollection;
 
-const addNumbers = (number1, number2) => {
-    var num1 = parseInt(number1)
-    var num2 = parseInt(number2)
-    var result = num1 + num2;
-    return result;
+const MdbClient = require('mongodb').MongoClient
+
+const uri='mongodb+srv://sit725:abysProj2022@cluster0.y9pjz5o.mongodb.net/?retryWrites=true&w=majority'
+
+const client = new MdbClient(uri, {useNewUrlParser: true});
+
+//create collection....
+const createColllection = (collectionName) => {
+    client.connect((err,db) => {
+        projectCollection = client.db().collection(collectionName);
+        if(!err) {
+            console.log('MongoDB Connected')
+        }
+        else {
+            console.log("DB Error: ", err);
+            process.exit(1);
+        }
+    })
 }
 
+//insert project......
+const insertProjects = (project, callback) => {
+    projectCollection.insert(project,callback);
+}
 
-/*app.get("/addTwoNumbers",(req,res) => {
-    var number1 = req.query.number1;
-    var number2 = req.query.number2;
-    var result = addNumbers(number1,number2)
-    res.json({statusCode: 200, data: result, message:"Success"})
-})*/
+//get project....
+const getProjects = (callback) => {
+    projectCollection.find({}).toArray(callback);
+}
 
-app.get("/addTwoNumber", (req, res) => {
-    res.sendFile(path.join(__dirname,"/"));
-  });
+app.get('/api/projects',(req,res) => {
+  const cardList = [
+  {
+      title: "Laborgini-Murci-Stick",
+      image: "images/Exotic-Cars-2.jpg",
+      link: "About Exotic-Cars 2",
+      desciption: "This is an exotic Lanborgini : Laborgini-Murci-Stick"
+  },
+  {
+      title: "ACID-GREEN-918-SPYDER-12",
+      image: "images/Exotic-Cars-3.jpg",
+      link: "About Exotic-Cars 3",
+      desciption: "This an Exotic Spyder -  ACID-GREEN-918-SPYDER-12"
+  },
+  {
+      title: "ACID-GREEN-918-SPYDER-12",
+      image: "images/Exotic-Cars-4.jpg",
+      link: "About Exotic-Cars 4",
+      desciption: "This an Exotic Spyder -  ACID-GREEN-918-SPYDER-12"
+  }
+]
+  res.json({statusCode: 200, data: cardList, message:"Success"})
+})
 
-  /*app.post("/addTwoNumbers",(req,res) => {
-    var number1 = req.body.number1;
-    var number2 = req.body.number2;
-    console.log("number1:", number1);
-    console.log("number2:", number2); 
-    var result = addNumbers(number1,number2)
-    res.json({statusCode: 200, data: result, message:"Success"})
-})*/
+// get api...!!
+app.get('/api/projects',(req,res) => {
+    getProjects((err,result) => {
+        if(err) {
+            res.json({statusCode: 400, message: err})
+        }
+        else {
+            res.json({statusCode: 200, message:"Success", data: result})
+        }
+    })
+})
 
-app.post("/addTwoNumber", (req, res) => {
-    const { a, b } = req.body;
-    res.send({
-      result: parseInt(a) + parseInt(b)
-    });
-  });
-
-  var messages =[{name:"Aby", message:"Where are you?"},{name:"Nathan", message:"How are you?"}
- ]
-
-  app.get("/messages", (req, res) => {
-    res.send(messages);
-  });
-
+// post api....
+app.post('/api/projects',(req,res) => {
+    console.log("New Project added", req.body)
+    var newProject = req.body;
+    insertProjects(newProject,(err,result) => {
+        if(err) {
+            res.json({statusCode: 400, message: err})
+        }
+        else {
+            res.json({statusCode: 200, message:"Project Successfully added", data: result})
+        }
+    })
+})
 
 
 var port = process.env.port || 5000;
 
 app.listen(port,()=>{
-    console.log("App running at http://localhost:"+port)
+    console.log("App listening to: "+port)
+    createColllection('exoticCars')
 })
