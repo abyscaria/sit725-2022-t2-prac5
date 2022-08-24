@@ -7,7 +7,7 @@ let projectCollection;
 
 const MdbClient = require('mongodb').MongoClient
 
-const uri='mongodb+srv://sit725:abysProj2022@cluster0.y9pjz5o.mongodb.net/?retryWrites=true&w=majority'
+const uri='mongodb+srv://<user>:<password>@cluster0.y9pjz5o.mongodb.net/?retryWrites=true&w=majority'
 
 const client = new MdbClient(uri, {useNewUrlParser: true});
 
