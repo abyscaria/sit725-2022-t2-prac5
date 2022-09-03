@@ -1,15 +1,18 @@
 var express = require("express")
 var app = express()
+var cors = require('cors')
 app.use(express.static(__dirname+'/public'))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors())
+
 let projectCollection;
 
 const MdbClient = require('mongodb').MongoClient
 
-const uri='mongodb+srv://<user>:<password>@cluster0.y9pjz5o.mongodb.net/?retryWrites=true&w=majority'
+const uri= 'mongodb+srv://<userid>:<pssswd>@cluster0.y9pjz5o.mongodb.net/?retrywrites=true&w=majority'
 
-const client = new MdbClient(uri, {useNewUrlParser: true});
+const client = new MdbClient(uri, {useNewUrlParser: true})
 
 //create collection....
 const createColllection = (collectionName) => {
@@ -27,7 +30,7 @@ const createColllection = (collectionName) => {
 
 //insert project......
 const insertProjects = (project, callback) => {
-    projectCollection.insert(project,callback);
+    projectCollection.insertOne(project,callback);
 }
 
 //get project....
