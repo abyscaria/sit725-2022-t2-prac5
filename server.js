@@ -1,6 +1,6 @@
 let express = require("express");
 let app = express();
-let dbConnect = require("./dbConnect");
+//let dbConnect = require("./dbConnect");
 
 //dbConnect.dbConnect()
 //var app = require('express')();
