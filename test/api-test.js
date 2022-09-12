@@ -2,7 +2,7 @@ var expect  = require("chai").expect;
 var request = require("request");
 
 describe("Add Two Numbers", function() {
-    var url = "http://localhost:8080/addTwoNumbers/3/5";
+    var url = "http://localhost:3000/addTwoNumbers/3/5";
     it("returns status 200 to check if api works", function(done) {
         request(url, function(error, response, body) {
             expect(response.statusCode).to.equal(200);
@@ -36,11 +36,11 @@ describe("Add Two Numbers", function() {
         expect(body.result).to.not.equal(15);
         done()
       });
-});
+    });
   });
 
   describe("Add Two strings", function() {
-    var url = "http://localhost:8080/addTwoNumbers/a/b";
+    var url = "http://localhost:3000/addTwoNumbers/a/b";
     it("should return status 200", function(done) {
         request(url, function(error, response, body) {
             expect(response.statusCode).to.equal(200);
@@ -64,8 +64,8 @@ describe("Add Two Numbers", function() {
   });
 
 
-  describe("Add Two strings", function() {
-    var url = "http://localhost:8080/api/projects";
+  describe("Validate Projects api", function() {
+    var url = "http://localhost:3000/api/projects";
     it("should return status 200", function(done) {
         request(url, function(error, response, body) {
             expect(response.statusCode).to.equal(200);
@@ -75,8 +75,8 @@ describe("Add Two Numbers", function() {
     it("returns the result as array", function(done) {
         request(url, function(error, response, body) {
             body = JSON.parse(body)
-            expect(body).to.be.a('array');
+            expect(body.data).to.be.a('array');
             done()
           });
     });
-});
+  });
